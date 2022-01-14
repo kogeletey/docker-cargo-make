@@ -5,7 +5,7 @@ FROM alpine:latest
 ARG CARGO_MAKE_VERSION
 ARG ARTIFACT_NAME="cargo-make-v${CARGO_MAKE_VERSION}-x86_64-unknown-linux-musl"
 
-RUN apk --update add openssl unzip cargo libressl-dev musl-dev wget
+RUN apk --update add openssl unzip cargo libressl-dev musl-dev wget rustup
 
 RUN mkdir -p /tmp/cargo-make \
     && wget -O /tmp/cargo-make/cargo-make.zip \
@@ -16,4 +16,6 @@ RUN unzip /tmp/cargo-make/cargo-make.zip -d /tmp/cargo-make/ \
     && chmod +x /usr/local/bin/cargo-make
 
 RUN apk del unzip wget \
-&& rm -rf /var/cache/apk/* \
+&& rm -rf /var/cache/apk/*
+
+RUN rustup-init -y
