@@ -35,7 +35,8 @@ jobs:
         run: |
           version=$(curl --silent "https://api.github.com/repos/sagiegurari/cargo-make/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")')
           echo "::set-output name=rversion::$version"
-      - run: echo ${{ steps.ghv.outputs.rversion }}
+      # checked version correctly, disable
+      #      - run: echo ${{ steps.ghv.outputs.rversion }}
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
@@ -70,4 +71,4 @@ jobs:
             "GITHUB_SHA=${GITHUB_SHA}"
             "GITHUB_REF=${GITHUB_REF}"
             "GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"
-            "CARGO_MAKE_VERSION=${{ github.event.inputs.make_version }}"
+            "CARGO_MAKE_VERSION=${{ steps.ghv.outputs.rversion }}"
