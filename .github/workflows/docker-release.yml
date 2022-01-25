@@ -1,16 +1,11 @@
-name: Docker
+name: docker publish registry
 
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
 # documentation.
 
-on:
-  workflow_dispatch:
-    inputs:
-      make_version:
-        required: true
-        description: Cargo Make version
+on: push
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -68,4 +63,4 @@ jobs:
             "GITHUB_SHA=${GITHUB_SHA}"
             "GITHUB_REF=${GITHUB_REF}"
             "GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"
-            "CARGO_MAKE_VERSION=${{ github.event.inputs.make_version  }}"
+            "CARGO_MAKE_VERSION=${{ }}"
