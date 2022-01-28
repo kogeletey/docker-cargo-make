@@ -1,21 +1,19 @@
 FROM alpine:latest
 
-#LABEL docker.cargo-make.maintainer="mbround18"
+#LABEL docker.makers.maintainer="mbround18"
 
 ARG CARGO_MAKE_VERSION
 ARG ARTIFACT_NAME="cargo-make-v${CARGO_MAKE_VERSION}-x86_64-unknown-linux-musl"
 
-RUN apk --update add openssl unzip cargo libressl-dev musl-dev wget rustup
+RUN apk --update add openssl unzip wget
 
-RUN mkdir -p /tmp/cargo-make \
-    && wget -O /tmp/cargo-make/cargo-make.zip \
+RUN mkdir -p /tmp/makers \
+    && wget -O /tmp/makers/makers.zip \
     https://github.com/sagiegurari/cargo-make/releases/download/${CARGO_MAKE_VERSION}/${ARTIFACT_NAME}.zip
 
-RUN unzip /tmp/cargo-make/cargo-make.zip -d /tmp/cargo-make/ \
-    && cp /tmp/cargo-make/${ARTIFACT_NAME}/cargo-make /usr/local/bin \
-    && chmod +x /usr/local/bin/cargo-make
+RUN unzip /tmp/makers/makers.zip -d /tmp/makers/ \
+    && cp /tmp/makers/${ARTIFACT_NAME}/makers /usr/local/bin \
+    && chmod +x /usr/local/bin/makers
 
-RUN apk del unzip wget \
+RUN apk del unzip wget openssl \
 && rm -rf /var/cache/apk/*
-
-RUN rustup-init -y
