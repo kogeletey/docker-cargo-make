@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:edge
 
 #LABEL docker.makers.maintainer="mbround18"
 
